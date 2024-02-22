@@ -3,24 +3,25 @@
 @tailwind utilities;
 
 body {
-  background-color: #000;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
-  font-family: 'Inter', sans-serif;
+  background-color: #000;
 }
 
-//3 e ayırdık 1 fr sağdan sola boşluk, diğer alan min max genişlik //header 96, orta alan oto, footer 72px
+div[data-nextjs-scroll-focus-boundary] {
+  height: 100%;
+}
+
 .container {
   display: grid;
-  grid-template-columns: 1fr min(1440px, 94%) 1fr; 
-  grid-template-rows: 96px auto 72px; 
+  grid-template-columns: 1fr min(1440px, 94%) 1fr;
+  grid-template-rows: 96px auto 72px;
 }
 
-//container ın altındaki her şey 2. col alıyorum ki bütün elemanlar ortaya gelsin ve sol sağ boşluklarım oluşsun
-.container > * {  
+.container > * {
   grid-column: 2;
 }
 
-//bütün elementler sol ve sağdan boşluk yaptığı için fluid yaptığımız zaman o boşlukta artık aradan kalkmış oluyor
-.container > fluid {
+.container > .fluid {
   grid-column: 1 / -1;
 }
