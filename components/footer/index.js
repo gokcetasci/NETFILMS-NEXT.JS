@@ -1,8 +1,11 @@
 import React from 'react'
+import styles from "./styles.module.css"
 
 function Footer() {
   return (
-    <div>index</div>
+    <footer className={styles.footer}>
+      Made with ❤️ by ashdnj
+    </footer>
   )
 }
 
