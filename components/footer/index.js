@@ -4,7 +4,7 @@ import styles from "./styles.module.css"
 function Footer() {
   return (
     <footer className={styles.footer}>
-      Made with ❤️ by ashdnj
+      Made with ❤️ by Gokce
     </footer>
   )
 }
