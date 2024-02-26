@@ -1,31 +1,31 @@
-import React from 'react'
-import { notFound } from 'next/navigation';
-import MovieContainer from '@/containers/movie';
-import Movies from "@/mocks/movies.json"
+import React from "react";
+import { notFound } from "next/navigation";
+import MovieContainer from "@/containers/movie";
 
-async function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+const API_URL = "https://api.themoviedb.org/3"
+
+const getMovie = async (movieId) => {
+    const res = await fetch (`${API_URL}/movie/${movieId}?api_key=${process.env.API_KEY}&page=1`);
+    return await res.json();
 }
 
+async function MoviePage({ params, searchParams }) {
 
-async function MoviePage({ params, searchParams }){
-    await delay(2000);
-    const movieDetail = Movies.results.find((movie) => movie.id.toString() === params.id );
+  const movieDetail = await getMovie(params.id)
 
-    //movie detail olmadığında kullanıcıyı 404 sayfasına yönlendir
+  if (!movieDetail) {
+    notFound();
+  } //movie detail olmadığında kullanıcıyı 404 sayfasına yönlendir
 
-    if (!movieDetail) {
-        notFound()
-    }
-    
-    if(searchParams.error === 'true') {
-        throw new Error("Error happened")
-    }
+  if (searchParams.error === "true") {
+    throw new Error("Error happened");
+  }
+
   return (
     <div>
-        <MovieContainer movie={movieDetail}/>
+      <MovieContainer movie={movieDetail} />
     </div>
-  )
+  );
 }
 
-export default MoviePage
+export default MoviePage;
